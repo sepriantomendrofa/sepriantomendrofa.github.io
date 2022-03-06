@@ -1,23 +1,56 @@
 //
-// Mixins: Toasts
+// Component: Toasts
 //
 
-// Toast Variant
-@mixin toast-variant($name, $color) {
-  &.bg-#{$name} {
-    background: rgba($color, .9) !important;
-    @if (color-yiq($color) == $yiq-text-light) {
+.toasts-top-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: $zindex-toasts;
 
-      .close {
-        color: color-yiq($color);
-        text-shadow: 0 1px 0 #000;
-      }
-    }
-
-    .toast-header {
-      background: rgba($color, .85);
-      color: color-yiq($color);
-    }
+  &.fixed {
+    position: fixed;
   }
 }
 
+.toasts-top-left {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: $zindex-toasts;
+
+  &.fixed {
+    position: fixed;
+  }
+}
+
+.toasts-bottom-right {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  z-index: $zindex-toasts;
+
+  &.fixed {
+    position: fixed;
+  }
+}
+
+.toasts-bottom-left {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: $zindex-toasts;
+
+  &.fixed {
+    position: fixed;
+  }
+}
+
+.toast {
+  @each $name, $color in $theme-colors {
+    @include toast-variant($name, $color);
+  }
+  @each $name, $color in $colors {
+    @include toast-variant($name, $color);
+  }
+}
